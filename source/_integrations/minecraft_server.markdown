@@ -24,18 +24,26 @@ ha_quality_scale: silver
 ## Use cases
 
 - Monitor whether a Minecraft server is online and responding.
-- Track player counts and server capacity in a dashboard.
-- Check whether a server is running the latest Java or Bedrock version.
+- Track player counts and server capacity.
+- Check whether a server is running the latest version.
 - Trigger automations when a server goes offline or when a player joins or leaves.
 
 ## Prerequisites
 
-- Minecraft Java Edition servers must be beta version 1.8 or release version 1.0 or newer.
-- Minecraft Java Edition servers with release version 1.16 and newer must set the configuration parameter `enable-status` to `true` in the server configuration file (`server.properties`).
+- Minecraft Java Edition servers must be beta version 1.8+ or release version 1.0+.
+- Minecraft Java Edition servers with release version 1.16+ must set the configuration parameter `enable-status` to `true` in the server configuration file (`server.properties`).
 
 {% include integrations/config_flow.md %}
 
-During setup you will be prompted to enter the **address** of the server.
+During setup you will be prompted to select the **edition** and to enter the **address** of the server.
+
+### Server edition
+
+The **server edition** decides which protocol has to be used to retrieve the status information from the server. Choose one of the following options:
+
+- **Legacy Java Edition**: Java Edition version beta 1.8 till release version 1.6.1
+- **Java Edition**: Java Edition version 1.7+
+- **Bedrock Edition**: All Bedrock Edition versions
 
 ### Server address
 
@@ -139,7 +147,7 @@ This integration {% term polling polls %} the configured Minecraft servers every
 
 ## Known limitations
 
-- Player names are only available on Java Edition servers with release version 1.7.2 or newer.
+- Player names are only available on Java Edition servers with release version 1.7.2+.
 
 - Depending on the server, the player names list may not be shown completely. Some servers and plugins limit or completely hide this list or even replace the player names with fake ones to show some custom messages there.
 
@@ -155,15 +163,15 @@ When you set up the integration, the connection check fails or the connection se
 
 #### Description
 
-This usually means the Minecraft server over the network, or the server is not responding to status requests.
+This usually means the Minecraft server is not responding to status requests at all or not as expected.
 
 #### Resolution
 
-1. Make sure the Minecraft server is running and reachable from the Home Assistant host.
+1. Verify the configured server edition.
 2. Verify the configured hostname or IP address and port are correct.
 3. If you use a hostname or SRV record, confirm that DNS resolves correctly.
 4. Check firewall and port-forwarding rules if the server is on another network.
-5. For Java Edition servers with release version 1.16 and newer, confirm that the configuration parameter `enable-status` is set to `true` in the server configuration file (`server.properties`).
+5. For Java Edition servers with release version 1.16+, confirm that the configuration parameter `enable-status` is set to `true` in the server configuration file (`server.properties`).
 
 ## Removing the integration
 
